@@ -1,4 +1,11 @@
 const container = document.getElementById("container");
+const buttonDiv = document.getElementById("btn1");
+let gridDiv = document.createElement("div");
+gridDiv.id = "gridDiv";
+let btn = document.createElement("button");
+buttonDiv.appendChild(btn);
+btn.textContent = "Grid Size";
+container.appendChild(gridDiv);
 let numSquares = 16;
 let squareSide = (960 / numSquares);
 console.log(squareSide);
@@ -8,7 +15,7 @@ for (let i = 0; i < numSquares; i++) {
     col.style.width = `${squareSide}px`;
     col.style.height = `${squareSide}px`;
     col.id = `div${i}`;
-    container.appendChild(col);
+    gridDiv.appendChild(col);
     col.textContent = col.id;
     for (let j = 1; j < numSquares; j++) {
         const row = document.createElement("div");
@@ -16,14 +23,20 @@ for (let i = 0; i < numSquares; i++) {
         row.style.height = `${squareSide}px`;
         row.classList.add("square");
         row.id = `div${i}${j}`;
-        container.appendChild(row);
+        gridDiv.appendChild(row);
         row.textContent = row.id;
     }
 }
-container.addEventListener("mouseover", (event) => {
+gridDiv.addEventListener("mouseover", (event) => {
     let target = event.target;
     let hoverSquareID = target.id;
-    console.log(hoverSquareID);
+    //    console.log(hoverSquareID);
     let hoverSquare = document.getElementById(hoverSquareID);
     hoverSquare.style.backgroundColor = "red";
 });
+btn.addEventListener("click", (e) => {
+    numSquares = parseInt(prompt(`How many squares would you like displayed?
+        Maximum 100.`));
+    console.log(numSquares);
+});
+console.log(numSquares);
